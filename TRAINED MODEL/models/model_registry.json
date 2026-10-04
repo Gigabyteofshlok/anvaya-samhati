@@ -1,0 +1,40 @@
+{
+    "project": "ANVAYA SA\u1e42HATI",
+    "pipeline_version": "1.0",
+    "data_type": "synthetic_demo_data",
+    "models": {
+        "patient_risk": {
+            "file": "models/patient_risk/patient_risk_model.joblib",
+            "type": "classification",
+            "target": "high_risk",
+            "threshold": 0.42,
+            "roc_auc": 0.7433
+        },
+        "readmission": {
+            "file": "models/readmission/readmission_model.joblib",
+            "type": "classification",
+            "target": "readmitted_30d",
+            "roc_auc": 0.7108
+        },
+        "length_of_stay": {
+            "file": "models/length_of_stay/length_of_stay_model.joblib",
+            "type": "regression",
+            "target": "length_of_stay",
+            "mae_days": 1.2034,
+            "r2": 0.4856
+        },
+        "deterioration": {
+            "file": "models/deterioration/deterioration_model.joblib",
+            "type": "classification",
+            "target": "deterioration",
+            "roc_auc": 0.6547
+        },
+        "bed_occupancy": {
+            "file": "models/bed_occupancy/bed_occupancy_model.joblib",
+            "type": "regression",
+            "target": "next_day_occupancy_rate",
+            "mae": 0.0043,
+            "r2": 0.3153
+        }
+    }
+}

@@ -1,0 +1,9 @@
+import { useQuery } from '@tanstack/react-query'
+import api from '../lib/api'
+
+export default function PatientPortalPage() {
+  const { data, isLoading, error } = useQuery({ queryKey: ['portal-me'], queryFn: () => api.get('/portal/me').then(r => r.data) })
+  if (isLoading) return <p className="text-sm text-gray-500">Loading secure portal…</p>
+  if (error) return <div className="card p-5 text-sm text-red-700">The signed-in account is not linked to a patient portal record.</div>
+  return <div className="space-y-5"><div><h1 className="text-xl font-bold">My health portal</h1><p className="text-sm text-gray-500">Only records linked to this signed-in patient account are shown.</p></div><section className="card p-5"><h2 className="text-sm font-semibold">{data.patient.name}</h2><p className="text-sm text-gray-500">{data.patient.patient_id} · {data.patient.mobile}</p></section><div className="grid grid-cols-2 lg:grid-cols-4 gap-4">{[['Admissions', data.admissions.length], ['Laboratory orders', data.laboratory_orders.length], ['Prescriptions', data.prescriptions.length], ['Invoices', data.invoices.length], ['Policies', data.policies.length], ['Claims', data.claims.length], ['Discharges', data.discharges.length], ['Timeline events', data.timeline.length]].map(([label, count]) => <div className="stat-card" key={String(label)}><p className="text-xs text-gray-500">{label}</p><p className="text-xl font-bold">{count}</p></div>)}</div><section className="card overflow-hidden"><div className="px-5 py-4 border-b"><h2 className="text-sm font-semibold">Recent timeline</h2></div><div className="divide-y">{data.timeline.map((event: any, index: number) => <div className="px-5 py-3 text-sm" key={index}><p className="font-medium">{event.title}</p><p className="text-xs text-gray-500">{new Date(event.timestamp).toLocaleString('en-IN')}</p></div>)}</div></section></div>
+}

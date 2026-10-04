@@ -1,0 +1,27 @@
+{
+    "model_name": "ANVAYA Bed Occupancy Forecast Model",
+    "model_type": "RandomForestRegressor",
+    "version": "1.0",
+    "target": "next_day_occupancy_rate",
+    "features": [
+        "current_occupancy",
+        "emergency_admissions",
+        "elective_admissions",
+        "discharges",
+        "average_los",
+        "day_of_week",
+        "month",
+        "total_beds",
+        "current_occupancy_rate"
+    ],
+    "training_days": 292,
+    "test_days": 73,
+    "total_beds": 168,
+    "metrics": {
+        "mae": 0.0043,
+        "rmse": 0.0079,
+        "r2": 0.3153
+    },
+    "data_type": "synthetic_demo_data",
+    "purpose": "Academic hospital capacity forecasting prototype"
+}
