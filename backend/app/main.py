@@ -27,8 +27,8 @@ app.add_middleware(
 # Include master API router
 app.include_router(api_router, prefix=settings.API_V1_STR)
 
-@app.get("/health", tags=["System"])
-def health_check(db: Session = Depends(get_db)):
+@app.get("/api/health", tags=["System"])
+def api_health_check(db: Session = Depends(get_db)):
     try:
         db.execute(text("SELECT 1"))
         db_status = "healthy (PostgreSQL)"
